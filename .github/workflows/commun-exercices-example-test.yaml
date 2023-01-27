@@ -1,0 +1,24 @@
+name: Exercices/Example
+
+on:
+    pull_request:
+        paths:
+            - "commun/exercices/example/response/**"
+
+jobs:
+    evaluation:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: 📦 Checkout project
+                uses: actions/checkout@v3
+
+            -   name: 🏗 Installation
+                working-directory: commun/exercices/example
+                run: composer require phpunit/phpunit
+
+            -   name: 📝 Evaluate
+                working-directory: commun/exercices/example
+                run: vendor/bin/phpunit tests
+
+            -   name: 🎊 Congratulation
+                run: echo "Great job 👌"
